@@ -1,0 +1,109 @@
+name: RTMCBukkit
+version: 1.0
+description: The Official RTMC Bukkit Plugin.
+author: STSc
+authors: [STSc]
+main: com.rushteamc.plugin.bukkit.Plugin
+database: false
+depend: []
+commands:
+  amsg:
+    description: Talk in adminchat
+    aliases: [a]
+    permission: rtmc.adminchat.talk
+    usage: /amsg message; Publish message in the admin chat.
+  permission:
+    description: Edit permissions
+    aliases: [perm]
+    permission: rtmc.permissions.manage
+    usage: /permission [user username|group groupname] [check|add|remove] permission
+  title:
+    description: Edit prefix / suffix
+    aliases: []
+    permission: rtmc.title.set
+    usage: /title [user username|group groupname] [setprefix prefix|setsuffix suffix|unsetprefix|unsetsuffix]
+  group:
+    description: Edit group membership
+    aliases: []
+    permission: rtmc.permissions.groups
+    usage: /group [user username|group groupname] [list|add group|remove group]
+  list:
+    description: List all online players
+    aliases: []
+    usage: /list
+permissions:
+  rtmc.*:
+    description: "Give permission to access all rtmc features."
+    children:
+      rtmc.title.*:
+        description: "Give permissions to edit all titles"
+        children:
+          rtmc.title.set: true
+          rtmc.title.users: true
+          rtmc.title.groups: true
+      rtmc.permissions.*:
+        description: "Give permissions to edit all permissions"
+        children:
+          rtmc.permissions.groups.*:
+            description: ""
+            children:
+              rtmc.permissions.groups.setlower: true
+              rtmc.permissions.groups.setlowerequal: true
+              rtmc.permissions.groups.setall: true
+          rtmc.permissions.titles: true
+          rtmc.permissions.manage: true
+      rtmc.chat.*:
+        description: "Give permission to receive and send colored chat messages"
+        children:
+          rtmc.chat.view: true
+          rtmc.chat.talk: true
+          rtmc.chat.colortalk: true
+      rtmc.adminchat.*:
+        description: "Give permission to receive and send colored admin chat messages"
+        children:
+          rtmc.adminchat.view: true
+          rtmc.adminchat.talk: true
+          rtmc.adminchat.colorview: true
+  rtmc.title.set:
+    description: "set pre- and suffix for users"
+    default: op
+  rtmc.title.users:
+    description: "set pre- and suffix for users"
+    default: op
+  rtmc.title.groups:
+    description: "set pre- and suffix for groups"
+    default: op
+  rtmc.permissions.titles:
+    description: "Set prefix and suffix for players and groups"
+    default: op
+  rtmc.permissions.groups.setlower:
+    description: "[UNUSED]"
+    default: op
+  rtmc.permissions.groups.setlowerequal:
+    description: "[UNUSED]"
+    default: op
+  rtmc.permissions.groups.setall:
+    description: "[UNUSED]"
+    default: op
+  rtmc.permissions.manage:
+    description: "manager permissions for players and groups"
+    default: op
+  rtmc.chat.view:
+    description: "[UNUSED] Receive the chat"
+    default: true
+  rtmc.chat.talk:
+    description: "[UNUSED] Send chat messages"
+    default: true
+  rtmc.chat.colortalk:
+    description: "[UNUSED] Send colored chat messages"
+    default: op
+  rtmc.adminchat.view:
+    description: "Receive adminchat messages"
+    default: op
+  rtmc.adminchat.talk:
+    description: "Send colored adminchat messages"
+    default: false
+  rtmc.adminchat.colortalk:
+    description: "[UNUSED] Send colored adminchat messages"
+    default: false
+
